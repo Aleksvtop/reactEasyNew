@@ -9,11 +9,12 @@ export default {
 
 } as ComponentMeta<typeof Accordion>;
 
-export const callback = action('accordion mode changed')
-export const CollapsedMenu = () => <Accordion titleValue={'Menu'} collapsed={true} onChange={callback}/>
-export const UncollapsedUsers = () => <Accordion titleValue={'Users'} collapsed={false} onChange={callback} />
+const callback = action('accordion mode changed')
+const onClickCallBack = action('some item was clicked')
+export const CollapsedMenu = () => <Accordion titleValue={'Users'} collapsed={true} onChange={callback} onClick={onClickCallBack} items={[]} />
+export const UncollapsedUsers = () => <Accordion titleValue={'Users'} collapsed={false} onChange={callback} onClick={onClickCallBack} items={[{title:'Aleks', value: 1}, {title:'Dimych', value: 2}, {title:'Victor', value: 3}, {title: 'Valera', value: 4}]}/>
 
 export const ModeChanging = () => {
     const [value, setValue] = useState<boolean>(true)
-    return <Accordion titleValue={'Menu'} collapsed={value} onChange={() => setValue(!value)}/>
+    return <Accordion titleValue={'Users'} collapsed={value} onChange={() => setValue(!value)} onClick={(title) => alert(`${title} was clicked`)} items={[{title:'Aleks', value: 1}, {title:'Dimych', value: 2}, {title:'Victor', value: 3}, {title: 'Valera', value: 4}]}/>
 }
